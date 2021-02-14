@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_205640) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "party_id", null: false
-    t.integer "plusones"
+    t.integer "plusones", default: 0
     t.index ["party_id"], name: "index_guests_on_party_id"
   end
 
