@@ -1,7 +1,7 @@
 class PartiesController < ApplicationController
 
   def index
-    binding.pry
+    render json: PartySerializer.new(Party.all)
   end
 
   def create
