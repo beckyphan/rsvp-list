@@ -12,8 +12,8 @@ class GuestsController < ApplicationController
     search_params
 
     if !!@guest
-      serialialized_guest = GuestSerializer.new(@guest)
-      render json: serialialized_guest
+      serialized_guest = GuestSerializer.new(@guest)
+      render json: serialized_guest
     end
   end
 
