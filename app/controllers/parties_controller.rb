@@ -1,10 +1,14 @@
 class PartiesController < ApplicationController
 
   def index
-    render json: PartySerializer.new(Party.all)
+    serialized_parties = PartySerializer.new(Party.all)
+    render json: serialized_parties
   end
 
   def create
+    @party = Party.create(party_params)
+    serialized_party = PartySerializer.new(@party)
+    render json: serialized_party
   end
 
   def show
@@ -14,6 +18,12 @@ class PartiesController < ApplicationController
   end
 
   def update
+  end
+
+  private
+
+  def party_params
+    params.require(:party).permit(:name, :hoh)
   end
 
 end

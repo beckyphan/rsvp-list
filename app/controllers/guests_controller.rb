@@ -1,7 +1,8 @@
 class GuestsController < ApplicationController
 
   def index
-    render json: GuestSerializer.new(Guest.all)
+    serialized_guests = GuestSerializer.new(Guest.all)
+    render json: serialized_guests
   end
 
   def create
