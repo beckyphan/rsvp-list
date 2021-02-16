@@ -1,7 +1,7 @@
 class Party < ApplicationRecord
   validates :name, presence: true
   validate :unique_party, on: :create
-  has_many :guests
+  has_many :guests, dependent: :destroy
 
   def unique_party
     if Party.select(:name).size > 1 && !hoh.present?
