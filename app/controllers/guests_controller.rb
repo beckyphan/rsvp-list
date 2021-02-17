@@ -27,11 +27,11 @@ class GuestsController < ApplicationController
   end
 
   # admin only actions
-  # POST	/admin/parties(.:format)
+  # POST	/admin/guests(.:format)
   def create
-    guest = Guest.new(guest_params)
-
-    if guest.save!
+    guest = Guest.create(guest_params)
+    if guest.valid?
+      guest.update(attending: false, shuttle: false, hotel: false, notes: "")
       serialized_guest = GuestSerializer.new(guest)
     else
       serialized_guest = {message: "Could not create guest"}
