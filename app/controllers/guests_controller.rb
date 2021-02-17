@@ -5,10 +5,6 @@ class GuestsController < ApplicationController
     render json: serialized_guests
   end
 
-  def create
-    binding.pry
-  end
-
   def show
     if params[:id].match(/\+/)
       search_params
@@ -28,6 +24,22 @@ class GuestsController < ApplicationController
 
     serialized_guest = GuestSerializer.new(@guest)
     render json: serialized_guest
+  end
+
+  # admin only actions
+  # POST	/admin/parties(.:format)
+  def create
+    binding.pry
+  end
+
+  # PUT	/admin/guests/:id(.:format)
+  def edit
+    binding.pry
+  end
+
+  # DELETE	/admin/guests/:id(.:format)
+  def destroy
+    binding.pry
   end
 
   private
