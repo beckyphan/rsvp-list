@@ -29,17 +29,27 @@ class GuestsController < ApplicationController
   # admin only actions
   # POST	/admin/parties(.:format)
   def create
-    binding.pry
+    guest = Guest.new(guest_params)
+
+    if guest.save!
+      serialized_guest = GuestSerializer.new(guest)
+    else
+      serialized_guest = {message: "Could not create guest"}
+    end
+
+    render json: serialized_guest
   end
 
   # PUT	/admin/guests/:id(.:format)
-  def edit
-    binding.pry
-  end
+  # def edit
+  #   binding.pry
+  # end
 
   # DELETE	/admin/guests/:id(.:format)
   def destroy
-    binding.pry
+    guest = Guest.find_by_id(params[:id])
+    guest.destroy
+    render json: {message: "successfully deleted"}
   end
 
   private
@@ -53,6 +63,10 @@ class GuestsController < ApplicationController
 
   def rsvp_params
     params.require(:guest).permit(:attending, :shuttle, :hotel, :notes)
+  end
+
+  def guest_params
+    params.require(:guest).permit(:fname, :lname, :plusones, :party_id)
   end
 
 end
