@@ -1,6 +1,6 @@
 class Party < ApplicationRecord
   validates :name, presence: true
-  validate :unique_party, on: :create
+  validate :unique_party, on: [:create, :update]
   has_many :guests, dependent: :destroy
 
   def unique_party
