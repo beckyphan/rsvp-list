@@ -22,8 +22,12 @@ class PartiesController < ApplicationController
   # PUT	/admin/parties/:id(.:format)
   def update
     party = Party.find_by_id(params[:id])
-    party.update(party_params)
-    serialized_party = PartySerializer.new(party)
+     if party.update!(party_params)
+        serialized_party = PartySerializer.new(party)
+      else
+        party = Party.find_by_id(params[:id])
+        serialized_party = PartySerializer.new(party)
+      end
     render json: serialized_party
   end
 
